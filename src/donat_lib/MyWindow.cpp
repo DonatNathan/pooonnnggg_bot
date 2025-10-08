@@ -1,6 +1,6 @@
-#include "donat_lib/Window.hpp"
+#include "donat_lib/MyWindow.hpp"
 
-Window::Window()
+MyWindow::MyWindow()
 {
     m_name = "New Graphical Project";
     m_mode = sf::VideoMode({500, 500});
@@ -8,7 +8,7 @@ Window::Window()
     m_window.setFramerateLimit(144);
 };
 
-Window::Window(std::string name, sf::VideoMode mode)
+MyWindow::MyWindow(std::string name, sf::VideoMode mode)
 {
     m_name = name;
     m_mode = mode;
@@ -16,12 +16,12 @@ Window::Window(std::string name, sf::VideoMode mode)
     m_window.setFramerateLimit(144);
 };
 
-Window::~Window()
+MyWindow::~MyWindow()
 {
 
 };
 
-void Window::Init()
+void MyWindow::Init()
 {
     while (m_window.isOpen()) {
         CheckEvents();
@@ -30,22 +30,26 @@ void Window::Init()
     }
 };
 
-void Window::CheckEvents()
+void MyWindow::CheckEvents()
 {
     while (const std::optional event = m_window.pollEvent()) {
         if (event->is<sf::Event::Closed>()) {
             m_window.close();
+        } else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+            if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
+                m_window.close();
         }
     }
 };
 
-void Window::Update()
+void MyWindow::Update()
 {
 
 };
 
-void Window::Draw()
+void MyWindow::Draw()
 {
     m_window.clear(sf::Color::Black);
+    m_game.draw(&m_window);
     m_window.display();
 };

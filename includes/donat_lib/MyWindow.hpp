@@ -1,17 +1,20 @@
 #include <SFML/Graphics.hpp>
+#include "donat_lib/MyGame.hpp"
 
 #pragma once
 
-class Window {
+class MyWindow {
     private:
         std::string m_name;
         sf::RenderWindow m_window;
         sf::VideoMode m_mode;
 
+        MyGame m_game;
+
     public:
-        Window();
-        Window(std::string name, sf::VideoMode mode);
-        ~Window();
+        MyWindow();
+        MyWindow(std::string name, sf::VideoMode mode);
+        ~MyWindow();
         void Init();
         void CheckEvents();
         void Draw();

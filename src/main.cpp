@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
     std::cout << "Hay Cap'tain !" << std::endl;
 
-    Window window;
+    MyWindow window("Ping Pooonnnggg", sf::VideoMode({(unsigned int) WINDOW_WIDTH, (unsigned int) WINDOW_HEIGH}));
     window.Init();
 
     return 0;
