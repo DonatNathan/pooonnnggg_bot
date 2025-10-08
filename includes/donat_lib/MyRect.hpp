@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "donat_lib/Globals.hpp"
+#include <iostream>
 
 #pragma once
 
@@ -13,4 +15,5 @@ class MyRect {
         MyRect(sf::Vector2f size, sf::Color color, sf::Vector2f position);
         ~MyRect();
         void draw(sf::RenderWindow *window);
+        void move(sf::Vector2f direction);
 };

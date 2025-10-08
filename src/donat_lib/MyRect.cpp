@@ -20,3 +20,12 @@ void MyRect::draw(sf::RenderWindow *window)
 {
     window->draw(m_rect);
 };
+
+void MyRect::move(sf::Vector2f direction)
+{
+    if (20 <= (m_position.y + direction.y) && (m_position.y + direction.y) <= WINDOW_HEIGH - 120) {
+        m_rect.move(direction);
+        m_position.x += direction.x;
+        m_position.y += direction.y;
+    }
+};

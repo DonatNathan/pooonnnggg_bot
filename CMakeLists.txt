@@ -18,7 +18,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SFML)
 
 # Compile graphical lib files
-file(GLOB library_sources "src/donat_lib/*.cpp")
+file(GLOB library_sources "src/*.cpp" "src/donat_lib/*.cpp")
 add_library(GraphicalGameLib ${library_sources})
 target_include_directories(GraphicalGameLib PUBLIC includes)
 

@@ -4,7 +4,7 @@ MyWindow::MyWindow()
 {
     m_name = "New Graphical Project";
     m_mode = sf::VideoMode({500, 500});
-    m_window.create(m_mode, m_name);
+    m_window.create(m_mode, m_name, sf::State::Fullscreen);
     m_window.setFramerateLimit(144);
 };
 
@@ -12,7 +12,7 @@ MyWindow::MyWindow(std::string name, sf::VideoMode mode)
 {
     m_name = name;
     m_mode = mode;
-    m_window.create(m_mode, m_name);
+    m_window.create(m_mode, m_name, sf::State::Fullscreen);
     m_window.setFramerateLimit(144);
 };
 
@@ -40,11 +40,12 @@ void MyWindow::CheckEvents()
                 m_window.close();
         }
     }
+    m_game.checkEvents();
 };
 
 void MyWindow::Update()
 {
-
+    m_game.update();
 };
 
 void MyWindow::Draw()
