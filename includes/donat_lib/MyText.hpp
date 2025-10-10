@@ -16,5 +16,9 @@ class MyText {
         MyText(std::string content, sf::Vector2f position);
         MyText(std::string content, int fontSize, sf::Color color, sf::Vector2f position);
         ~MyText();
+
         void draw(sf::RenderWindow *window);
+
+        std::string getContent();
+        void setContent(std::string newContent);
 };

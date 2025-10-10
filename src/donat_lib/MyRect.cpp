@@ -23,9 +23,16 @@ void MyRect::draw(sf::RenderWindow *window)
 
 void MyRect::move(sf::Vector2f direction)
 {
-    if (20 <= (m_position.y + direction.y) && (m_position.y + direction.y) <= WINDOW_HEIGH - 120) {
-        m_rect.move(direction);
-        m_position.x += direction.x;
-        m_position.y += direction.y;
-    }
+    m_rect.move(direction);
+    m_position = m_rect.getPosition();
+};
+
+sf::Vector2f MyRect::getPosition()
+{
+    return m_position;
+};
+
+void MyRect::setPosition(sf::Vector2f newPosition)
+{
+    m_rect.setPosition(newPosition);
 };

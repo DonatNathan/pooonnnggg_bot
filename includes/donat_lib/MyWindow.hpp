@@ -15,6 +15,7 @@ class MyWindow {
         MyWindow();
         MyWindow(std::string name, sf::VideoMode mode);
         ~MyWindow();
+        
         void Init();
         void CheckEvents();
         void Draw();

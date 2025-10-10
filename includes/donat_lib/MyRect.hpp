@@ -14,6 +14,10 @@ class MyRect {
     public:
         MyRect(sf::Vector2f size, sf::Color color, sf::Vector2f position);
         ~MyRect();
+        
         void draw(sf::RenderWindow *window);
         void move(sf::Vector2f direction);
+
+        sf::Vector2f getPosition();
+        void setPosition(sf::Vector2f newPosition);
 };

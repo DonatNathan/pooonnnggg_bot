@@ -13,6 +13,10 @@ class Ball {
     public:
         Ball();
         ~Ball();
+
         void draw(sf::RenderWindow *window);
         void update(float dt);
+        void reset();
+
+        sf::Vector2f getPosition();
 };

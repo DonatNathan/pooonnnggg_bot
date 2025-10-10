@@ -37,6 +37,20 @@ void MyGame::update()
 {
     m_dt = m_clock.restart().asSeconds();
     m_ball.update(m_dt);
+    updateScore();
+};
+
+void MyGame::updateScore()
+{
+    sf::Vector2f position = m_ball.getPosition();
+
+    if (position.x < 10) {
+        m_scoreRight.setContent(std::to_string(std::stoi(m_scoreLeft.getContent()) + 1));
+        m_ball.reset();
+    } else if (position.x + 10 > WINDOW_WIDTH - 10) {
+        m_scoreLeft.setContent(std::to_string(std::stoi(m_scoreLeft.getContent()) + 1));
+        m_ball.reset();
+    }
 };
 
 void MyGame::draw(sf::RenderWindow *window)

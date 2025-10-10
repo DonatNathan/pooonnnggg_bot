@@ -41,3 +41,14 @@ void MyText::draw(sf::RenderWindow *window)
 {
     window->draw(m_text);
 };
+
+void MyText::setContent(std::string newContent)
+{
+    m_content = newContent;
+    m_text.setString(m_content);
+};
+
+std::string MyText::getContent()
+{
+    return m_content;
+};
