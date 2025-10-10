@@ -4,7 +4,7 @@
 inline float WINDOW_WIDTH = 640;
 inline float WINDOW_HEIGH = 480;
 
-inline float FRAMERATE_LIMIT = 60;
+inline float FRAMERATE_LIMIT = 120;
 
 inline float BORDER_VERTICAL_HEIGHT = 20;
 inline float BORDER_HORIZONTAL_WIDTH = 40;
@@ -19,6 +19,5 @@ inline float PADDLE_SPEED = 240;
 inline float BALL_SIZE = 8;
 inline float BALL_SPEED = 200;
 inline float BALL_MAX_SPEED = 600;
-
 
 inline float FONT_SIZE = 64;

@@ -6,6 +6,21 @@ MyWindow::MyWindow(std::string name, sf::VideoMode mode)
     m_mode = mode;
     m_window.create(m_mode, m_name, sf::State::Fullscreen);
     m_window.setFramerateLimit(FRAMERATE_LIMIT);
+
+    sf::View view(sf::FloatRect({0, 0}, {640, 480}));
+
+    float scaleX = static_cast<float>(mode.size.x) / 640.f;
+    float scaleY = static_cast<float>(mode.size.y) / 480.f;
+    float scale = std::min(scaleX, scaleY);
+
+    float viewportWidth = 640.f * scale / mode.size.x;
+    float viewportHeight = 480.f * scale / mode.size.y;
+    float viewportLeft = (1.f - viewportWidth) / 2.f;
+    float viewportTop = (1.f - viewportHeight) / 2.f;
+
+    view.setViewport(sf::FloatRect({viewportLeft, viewportTop}, {viewportWidth, viewportHeight}));
+
+    m_window.setView(view);
 };
 
 MyWindow::~MyWindow()

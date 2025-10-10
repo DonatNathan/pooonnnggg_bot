@@ -9,7 +9,7 @@ MyGame::MyGame()
     m_leftBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({BORDER_HORIZONTAL_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2})),
     m_rightBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({WINDOW_WIDTH - BORDER_HORIZONTAL_WIDTH - PADDLE_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2}))
 {
-    float y = 0;
+    float y = BORDER_VERTICAL_HEIGHT;
     while (y < WINDOW_HEIGH) {
         m_line.push_back(MyRect(sf::Vector2f({MIDDLE_LINE_POINT_SIZE, MIDDLE_LINE_POINT_SIZE}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - MIDDLE_LINE_POINT_SIZE) / 2, y})));
         y += MIDDLE_LINE_POINT_SIZE + MIDDLE_LINE_POINT_GAB;

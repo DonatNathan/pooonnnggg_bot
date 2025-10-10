@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-    MyWindow window("Ping Pooonnnggg", sf::VideoMode({(unsigned int) WINDOW_WIDTH, (unsigned int) WINDOW_HEIGH}));
+    MyWindow window("Ping Pooonnnggg", sf::VideoMode::getDesktopMode());
     window.Init();
 
     return 0;
