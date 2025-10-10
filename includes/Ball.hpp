@@ -15,8 +15,11 @@ class Ball {
         ~Ball();
 
         void draw(sf::RenderWindow *window);
-        void update(float dt);
+        void update(float dt, MyRect *leftPaddle, MyRect *rightPaddle);
         void reset();
+
+        void handleWallCollision();
+        void handlePaddleCollision(MyRect *paddle);
 
         sf::Vector2f getPosition();
 };

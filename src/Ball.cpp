@@ -22,9 +22,12 @@ void Ball::draw(sf::RenderWindow *window)
     m_shape.draw(window);
 };
 
-void Ball::update(float dt)
+void Ball::update(float dt, MyRect *leftPaddle, MyRect *rightPaddle)
 {
     m_shape.move(m_velocity * m_speed * dt);
+    handleWallCollision();
+    handlePaddleCollision(leftPaddle);
+    handlePaddleCollision(rightPaddle);
 };
 
 sf::Vector2f Ball::getPosition()
@@ -39,4 +42,19 @@ void Ball::reset()
         (rand() % 2 == 0 ? -1.f : 1.f),
         (rand() % 2 == 0 ? -0.5f : 0.5f)
     );
+};
+
+void Ball::handleWallCollision() {
+    sf::Vector2f position = m_shape.getPosition();
+
+    if (position.y < 10 || position.y + 10 > WINDOW_HEIGH - 10) {
+        m_velocity.y = -m_velocity.y;
+    }
+};
+
+void Ball::handlePaddleCollision(MyRect *paddle) {
+    if (m_shape.getShape().getGlobalBounds().findIntersection(paddle->getShape().getGlobalBounds())) {
+        m_velocity.x = -m_velocity.x;
+        m_velocity.y += ((rand() % 100) / 100.f - 0.5f) * 0.5f;
+    }
 };

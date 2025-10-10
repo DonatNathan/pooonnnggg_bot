@@ -36,7 +36,7 @@ void MyGame::checkEvents()
 void MyGame::update()
 {
     m_dt = m_clock.restart().asSeconds();
-    m_ball.update(m_dt);
+    m_ball.update(m_dt, m_leftBoard.getShape(), m_rightBoard.getShape());
     updateScore();
 };
 

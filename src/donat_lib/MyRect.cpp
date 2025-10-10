@@ -36,3 +36,8 @@ void MyRect::setPosition(sf::Vector2f newPosition)
 {
     m_rect.setPosition(newPosition);
 };
+
+sf::RectangleShape MyRect::getShape()
+{
+    return m_rect;
+};

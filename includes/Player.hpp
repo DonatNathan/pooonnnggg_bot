@@ -10,4 +10,6 @@ class Player {
         
         void draw(sf::RenderWindow *window);
         void move(sf::Vector2f direction);
+
+        MyRect *getShape();
 };

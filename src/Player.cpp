@@ -24,3 +24,10 @@ void Player::draw(sf::RenderWindow *window)
 {
     m_shape.draw(window);
 };
+
+
+MyRect *Player::getShape()
+{
+    return &m_shape;
+};
+
