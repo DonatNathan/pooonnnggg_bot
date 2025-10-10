@@ -1,19 +1,11 @@
 #include "donat_lib/MyWindow.hpp"
 
-MyWindow::MyWindow()
-{
-    m_name = "New Graphical Project";
-    m_mode = sf::VideoMode({500, 500});
-    m_window.create(m_mode, m_name, sf::State::Fullscreen);
-    m_window.setFramerateLimit(144);
-};
-
 MyWindow::MyWindow(std::string name, sf::VideoMode mode)
 {
     m_name = name;
     m_mode = mode;
     m_window.create(m_mode, m_name, sf::State::Fullscreen);
-    m_window.setFramerateLimit(144);
+    m_window.setFramerateLimit(FRAMERATE_LIMIT);
 };
 
 MyWindow::~MyWindow()

@@ -1,6 +1,9 @@
 #include "donat_lib/MyRect.hpp"
 #include "donat_lib/Globals.hpp"
 
+#include <chrono>
+#include <thread>
+
 #pragma once
 
 class Ball {

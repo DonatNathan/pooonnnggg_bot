@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "donat_lib/Globals.hpp"
 #include "donat_lib/MyGame.hpp"
 
 #pragma once
@@ -12,7 +13,6 @@ class MyWindow {
         MyGame m_game;
 
     public:
-        MyWindow();
         MyWindow(std::string name, sf::VideoMode mode);
         ~MyWindow();
         

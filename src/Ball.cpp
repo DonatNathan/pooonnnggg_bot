@@ -2,14 +2,14 @@
 
 Ball::Ball()
     :
-    m_shape(sf::Vector2f({10, 10}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - 10) / 2, (WINDOW_HEIGH - 10) / 2}))
+    m_shape(sf::Vector2f({BALL_SIZE, BALL_SIZE}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - BALL_SIZE) / 2, (WINDOW_HEIGH - BALL_SIZE) / 2}))
 {
     m_speed = BALL_SPEED;
     m_velocity = sf::Vector2f(
         (rand() % 2 == 0 ? -1.f : 1.f),
         (rand() % 2 == 0 ? -0.5f : 0.5f)
     );
-    m_startPosition = sf::Vector2f({(WINDOW_WIDTH - 10) / 2, (WINDOW_HEIGH - 10) / 2});
+    m_startPosition = sf::Vector2f({(WINDOW_WIDTH - BALL_SIZE) / 2, (WINDOW_HEIGH - BALL_SIZE) / 2});
 };
 
 Ball::~Ball()
@@ -47,7 +47,7 @@ void Ball::reset()
 void Ball::handleWallCollision() {
     sf::Vector2f position = m_shape.getPosition();
 
-    if (position.y < 10 || position.y + 10 > WINDOW_HEIGH - 10) {
+    if (position.y < BORDER_VERTICAL_HEIGHT || position.y + BALL_SIZE > WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT) {
         m_velocity.y = -m_velocity.y;
     }
 };

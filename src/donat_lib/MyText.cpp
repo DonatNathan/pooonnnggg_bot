@@ -6,7 +6,7 @@ MyText::MyText(std::string content, sf::Vector2f position)
     m_text(m_font)
 {
     m_content = content;
-    m_fontSize = 32;
+    m_fontSize = FONT_SIZE;
     m_position = position;
     m_color = sf::Color::White;
 

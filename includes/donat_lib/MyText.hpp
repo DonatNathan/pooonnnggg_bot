@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "donat_lib/Globals.hpp"
 #include <string>
 
 #pragma once

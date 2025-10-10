@@ -15,7 +15,7 @@ Player::~Player()
 void Player::move(sf::Vector2f direction)
 {
     sf::Vector2f position = m_shape.getPosition();
-    if (20 <= (position.y + direction.y) && (position.y + direction.y) <= WINDOW_HEIGH - 120) {
+    if (0 < (position.y + direction.y) && (position.y + direction.y) < WINDOW_HEIGH - PADDLE_HEIGHT) { // If there is a problem, change that
         m_shape.move(direction);
     }
 };
