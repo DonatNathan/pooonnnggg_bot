@@ -9,7 +9,11 @@ MyGame::MyGame()
     m_leftBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({BORDER_HORIZONTAL_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2})),
     m_rightBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({WINDOW_WIDTH - BORDER_HORIZONTAL_WIDTH - PADDLE_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2}))
 {
-
+    float y = 0;
+    while (y < WINDOW_HEIGH) {
+        m_line.push_back(MyRect(sf::Vector2f({MIDDLE_LINE_POINT_SIZE, MIDDLE_LINE_POINT_SIZE}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - MIDDLE_LINE_POINT_SIZE) / 2, y})));
+        y += MIDDLE_LINE_POINT_SIZE + MIDDLE_LINE_POINT_GAB;
+    }
 };
 
 MyGame::~MyGame()
@@ -36,6 +40,7 @@ void MyGame::checkEvents()
 void MyGame::update()
 {
     m_dt = m_clock.restart().asSeconds();
+
     m_ball.update(m_dt, m_leftBoard.getShape(), m_rightBoard.getShape());
     updateScore();
 };
@@ -62,4 +67,6 @@ void MyGame::draw(sf::RenderWindow *window)
     m_leftBoard.draw(window);
     m_rightBoard.draw(window);
     m_ball.draw(window);
+    for (auto&& value : m_line)
+        value.draw(window);
 };

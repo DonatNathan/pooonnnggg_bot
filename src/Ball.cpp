@@ -24,10 +24,17 @@ void Ball::draw(sf::RenderWindow *window)
 
 void Ball::update(float dt, MyRect *leftPaddle, MyRect *rightPaddle)
 {
-    m_shape.move(m_velocity * m_speed * dt);
-    handleWallCollision();
-    handlePaddleCollision(leftPaddle);
-    handlePaddleCollision(rightPaddle);
+    if (m_waitingToReset) {
+        if (m_resetClock.getElapsedTime().asSeconds() >= 1.f) {
+            m_speed = BALL_SPEED;
+            m_waitingToReset = false;
+        }
+    } else {
+        m_shape.move(m_velocity * m_speed * dt);
+        handleWallCollision();
+        handlePaddleCollision(leftPaddle);
+        handlePaddleCollision(rightPaddle);
+    }
 };
 
 sf::Vector2f Ball::getPosition()
@@ -37,11 +44,10 @@ sf::Vector2f Ball::getPosition()
 
 void Ball::reset()
 {
+    m_speed = BALL_SPEED;
     m_shape.setPosition(m_startPosition);
-    m_velocity = sf::Vector2f(
-        (rand() % 2 == 0 ? -1.f : 1.f),
-        (rand() % 2 == 0 ? -0.5f : 0.5f)
-    );
+    m_resetClock.restart();
+    m_waitingToReset = true;
 };
 
 void Ball::handleWallCollision() {
@@ -56,5 +62,7 @@ void Ball::handlePaddleCollision(MyRect *paddle) {
     if (m_shape.getShape().getGlobalBounds().findIntersection(paddle->getShape().getGlobalBounds())) {
         m_velocity.x = -m_velocity.x;
         m_velocity.y += ((rand() % 100) / 100.f - 0.5f) * 0.5f;
+        if (m_speed < BALL_MAX_SPEED)
+            m_speed += 50;
     }
 };

@@ -4,6 +4,7 @@
 #include "Player.hpp"
 #include "Ball.hpp"
 #include <iostream>
+#include <vector>
 
 #pragma once
 
@@ -18,6 +19,8 @@ class MyGame {
         Player m_leftBoard;
         Player m_rightBoard;
         Ball m_ball;
+        std::vector<MyRect> m_line;
+
     public:
         MyGame();
         ~MyGame();
