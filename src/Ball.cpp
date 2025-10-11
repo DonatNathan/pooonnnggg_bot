@@ -60,8 +60,11 @@ void Ball::handleWallCollision() {
 
 void Ball::handlePaddleCollision(MyRect *paddle) {
     if (m_shape.getShape().getGlobalBounds().findIntersection(paddle->getShape().getGlobalBounds())) {
+        float paddleCenter = paddle->getPosition().y + PADDLE_HEIGHT / 2;
+        float impact = (m_shape.getPosition().y + BALL_SIZE / 2 - paddleCenter) / (PADDLE_HEIGHT / 2.f);
+        float verticalSpeed = impact * 400.f;
         m_velocity.x = -m_velocity.x;
-        m_velocity.y += ((rand() % 100) / 100.f - 0.5f) * 0.5f;
+        m_velocity.y = verticalSpeed / m_speed;
         if (m_speed < BALL_MAX_SPEED)
             m_speed += 50;
     }

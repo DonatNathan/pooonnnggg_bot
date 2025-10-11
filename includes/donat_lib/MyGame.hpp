@@ -1,6 +1,7 @@
 #include "donat_lib/MyRect.hpp"
 #include "donat_lib/MyText.hpp"
 #include "donat_lib/Globals.hpp"
+#include "Number.hpp"
 #include "Player.hpp"
 #include "Ball.hpp"
 #include <iostream>
@@ -12,14 +13,16 @@ class MyGame {
     private:
         sf::Clock m_clock;
         float m_dt;
-        MyText m_scoreLeft;
-        MyText m_scoreRight;
         MyRect m_topBar;
         MyRect m_bottomBar;
         Player m_leftBoard;
         Player m_rightBoard;
         Ball m_ball;
         std::vector<MyRect> m_line;
+        int m_scoreLeft;
+        int m_scoreRight;
+        Number m_leftPlayer;
+        Number m_rightPlayer;
 
     public:
         MyGame();
