@@ -13,7 +13,7 @@ class MyWindow {
         MyGame m_game;
 
     public:
-        MyWindow(std::string name, sf::VideoMode mode);
+        MyWindow(std::string name, sf::VideoMode mode, std::string gamemode);
         ~MyWindow();
         
         void Init();

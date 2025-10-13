@@ -2,8 +2,8 @@
 #include "donat_lib/MyText.hpp"
 #include "donat_lib/Globals.hpp"
 #include "Number.hpp"
-#include "Player.hpp"
 #include "Ball.hpp"
+#include "Bot.hpp"
 #include <iostream>
 #include <vector>
 
@@ -23,9 +23,11 @@ class MyGame {
         int m_scoreRight;
         Number m_leftPlayer;
         Number m_rightPlayer;
+        std::string m_gamemode;
+        Bot m_bot;
 
     public:
-        MyGame();
+        MyGame(std::string gamemode);
         ~MyGame();
 
         void checkEvents();

@@ -1,6 +1,8 @@
 #include "donat_lib/MyWindow.hpp"
 
-MyWindow::MyWindow(std::string name, sf::VideoMode mode)
+MyWindow::MyWindow(std::string name, sf::VideoMode mode, std::string gamemode)
+    :
+    m_game(gamemode)
 {
     m_name = name;
     m_mode = mode;
