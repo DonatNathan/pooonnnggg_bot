@@ -53,3 +53,7 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+// TODO: Fix ball colliders
+// TODO: Display ball simulations
+// TODO: Find a breach in the opponent

@@ -82,10 +82,25 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
     
     const float dtSimulation = 0.01f;
 
-    while ((ballVelocity.x > 0 && ballPosition.x + BALL_SIZE < opponent->getShape()->getPosition().x) || (ballVelocity.x < 0 && ballPosition.x > himself->getShape()->getPosition().x + PADDLE_WIDTH)) {
+    sf::FloatRect rectOpponent = opponent->getShape()->getShape().getGlobalBounds();
+
+    while ((ballVelocity.x > 0 && ballPosition.x + BALL_SIZE <= opponent->getShape()->getPosition().x) || (ballVelocity.x < 0 && ballPosition.x >= himself->getShape()->getPosition().x + PADDLE_WIDTH)) {
+
         ballPosition += ballVelocity * ball.getSpeed() * dtSimulation;
+
         if (ballPosition.y < BORDER_VERTICAL_HEIGHT || ballPosition.y + BALL_SIZE > WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
             ballVelocity.y = -ballVelocity.y;
+
+        sf::FloatRect ballRect({ballPosition.x, ballPosition.y}, {BALL_SIZE, BALL_SIZE});
+
+        if (ballRect.findIntersection(rectOpponent) && ballVelocity.x > 0) {
+            float paddleCenter = rectOpponent.position.y + PADDLE_HEIGHT / 2;
+            float impact = (ballPosition.y + BALL_SIZE / 2 - paddleCenter) / (PADDLE_HEIGHT / 2);
+            float verticalSpeed = impact * 400.f;
+
+            ballVelocity.x = -ballVelocity.x;
+            ballVelocity.y = verticalSpeed / ball.getSpeed();
+        }
     }
 
     return ballPosition.y + BALL_SIZE / 2;
