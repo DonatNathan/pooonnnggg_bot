@@ -13,6 +13,8 @@ class Bot {
 
         void analyse(Ball ball, Player *himself, Player *opponent, float dt);
         void updateEasyBot(Ball ball, Player *himself, float dt);
-        void updateMediumBot(Ball ball, Player *himself, float dt);
+        void updateMediumBot(Ball ball, Player *himself, Player *opponent, float dt);
         void updateHardBot(Ball ball, Player *himself, Player *opponent, float dt);
+
+        float simulateBall(Ball ball, Player *himself, Player *opponent);
 };
