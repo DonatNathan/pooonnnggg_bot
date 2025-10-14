@@ -14,6 +14,7 @@ MyGame::MyGame(std::string gamemode)
     m_scoreRight = 0;
     m_gamemode = gamemode;
     float y = BORDER_VERTICAL_HEIGHT;
+    m_isDebugMode = false;
     while (y < WINDOW_HEIGH) {
         m_line.push_back(MyRect(sf::Vector2f({MIDDLE_LINE_POINT_SIZE, MIDDLE_LINE_POINT_SIZE}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - MIDDLE_LINE_POINT_SIZE) / 2, y})));
         y += MIDDLE_LINE_POINT_SIZE + MIDDLE_LINE_POINT_GAB;
@@ -78,4 +79,19 @@ void MyGame::draw(sf::RenderWindow *window)
         value.draw(window);
     m_leftPlayer.drawNumber(window);
     m_rightPlayer.drawNumber(window);
+};
+
+void MyGame::changeDebugMode()
+{
+    m_isDebugMode = !m_isDebugMode;
+
+    if (m_isDebugMode) {
+        m_leftBoard.getShape()->setColor(sf::Color::Blue);
+        m_rightBoard.getShape()->setColor(sf::Color::Blue);
+        m_ball.getShape()->setColor(sf::Color::Red);
+    } else {
+        m_leftBoard.getShape()->setColor(sf::Color::White);
+        m_rightBoard.getShape()->setColor(sf::Color::White);
+        m_ball.getShape()->setColor(sf::Color::White);
+    }
 };

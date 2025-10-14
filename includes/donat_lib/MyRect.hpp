@@ -23,4 +23,5 @@ class MyRect {
         sf::RectangleShape getShape();
 
         void setPosition(sf::Vector2f newPosition);
+        void setColor(sf::Color newColor);
 };

@@ -47,6 +47,9 @@ void MyWindow::CheckEvents()
         } else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
             if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
                 m_window.close();
+        } else if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>()) {
+            if (keyReleased->scancode == sf::Keyboard::Scancode::D)
+                m_game.changeDebugMode();
         }
     }
     m_game.checkEvents();

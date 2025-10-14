@@ -47,3 +47,8 @@ void MyRect::setPosition(sf::Vector2f newPosition)
     m_position = newPosition;
     m_rect.setPosition(m_position);
 };
+
+void MyRect::setColor(sf::Color newColor)
+{
+    m_rect.setFillColor(newColor);
+};

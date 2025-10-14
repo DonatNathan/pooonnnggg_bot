@@ -15,15 +15,16 @@ Player::~Player()
 void Player::move(sf::Vector2f direction)
 {
     sf::Vector2f position = m_shape.getPosition();
-    if (0 < (position.y + direction.y) && (position.y + direction.y) < WINDOW_HEIGH - PADDLE_HEIGHT) {
+
+    if (BORDER_VERTICAL_HEIGHT <= (position.y + direction.y) && (position.y + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT) {
         m_shape.move(direction);
+    } else if (BORDER_VERTICAL_HEIGHT < position.y && position.y + PADDLE_HEIGHT < WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT) {
+        if (direction.y < 0) {
+            m_shape.move({direction.x, (position.y - BORDER_VERTICAL_HEIGHT) * -1});
+        } else {
+            m_shape.move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - position.y});
+        }
     }
-
-    if (BORDER_VERTICAL_HEIGHT > position.y)
-        m_shape.setPosition({m_shape.getPosition().x, BORDER_VERTICAL_HEIGHT});
-
-    if (position.y > WINDOW_HEIGH - PADDLE_HEIGHT - BORDER_VERTICAL_HEIGHT)
-        m_shape.setPosition({m_shape.getPosition().x, WINDOW_HEIGH - PADDLE_HEIGHT - BORDER_VERTICAL_HEIGHT});
 };
 
 void Player::draw(sf::RenderWindow *window)

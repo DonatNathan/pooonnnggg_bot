@@ -25,6 +25,7 @@ class MyGame {
         Number m_rightPlayer;
         std::string m_gamemode;
         Bot m_bot;
+        bool m_isDebugMode;
 
     public:
         MyGame(std::string gamemode);
@@ -34,4 +35,5 @@ class MyGame {
         void update();
         void updateScore();
         void draw(sf::RenderWindow *window);
+        void changeDebugMode();
 };
