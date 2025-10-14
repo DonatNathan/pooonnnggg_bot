@@ -19,6 +19,8 @@ class MyRect {
         void move(sf::Vector2f direction);
 
         sf::Vector2f getPosition();
-        void setPosition(sf::Vector2f newPosition);
+        sf::Vector2f getSize();
         sf::RectangleShape getShape();
+
+        void setPosition(sf::Vector2f newPosition);
 };

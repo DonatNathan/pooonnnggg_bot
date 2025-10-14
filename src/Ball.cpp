@@ -37,11 +37,6 @@ void Ball::update(float dt, MyRect *leftPaddle, MyRect *rightPaddle)
     }
 };
 
-sf::Vector2f Ball::getPosition()
-{
-    return m_shape.getPosition();
-};
-
 void Ball::reset()
 {
     m_speed = BALL_SPEED;
@@ -68,4 +63,19 @@ void Ball::handlePaddleCollision(MyRect *paddle) {
         if (m_speed < BALL_MAX_SPEED)
             m_speed += 50;
     }
+};
+
+MyRect *Ball::getShape()
+{
+    return &m_shape;
+};
+
+float Ball::getSpeed()
+{
+    return m_speed;
+};
+
+sf::Vector2f Ball::getVelocity()
+{
+    return m_velocity;
 };

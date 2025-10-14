@@ -47,14 +47,14 @@ void MyGame::update()
 {
     m_dt = m_clock.restart().asSeconds();
 
-    m_bot.analyse(m_ball, m_leftBoard, m_rightBoard);
+    m_bot.analyse(m_ball, &m_leftBoard, &m_rightBoard, m_dt);
     m_ball.update(m_dt, m_leftBoard.getShape(), m_rightBoard.getShape());
     updateScore();
 };
 
 void MyGame::updateScore()
 {
-    sf::Vector2f position = m_ball.getPosition();
+    sf::Vector2f position = m_ball.getShape()->getPosition();
 
     if (position.x < 0) {
         m_scoreRight++;

@@ -23,5 +23,7 @@ class Ball {
         void handleWallCollision();
         void handlePaddleCollision(MyRect *paddle);
 
-        sf::Vector2f getPosition();
+        MyRect *getShape();
+        float getSpeed();
+        sf::Vector2f getVelocity();
 };

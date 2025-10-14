@@ -11,8 +11,8 @@ class Bot {
         Bot(std::string gamemode);
         ~Bot();
 
-        void analyse(Ball ball, Player himself, Player opponent);
-        void updateEasyBot(Ball ball, Player himself);
-        void updateMediumBot(Ball ball, Player himself);
-        void updateHardBot(Ball ball, Player himself, Player opponent);
+        void analyse(Ball ball, Player *himself, Player *opponent, float dt);
+        void updateEasyBot(Ball ball, Player *himself, float dt);
+        void updateMediumBot(Ball ball, Player *himself, float dt);
+        void updateHardBot(Ball ball, Player *himself, Player *opponent, float dt);
 };

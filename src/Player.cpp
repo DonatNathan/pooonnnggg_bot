@@ -15,7 +15,7 @@ Player::~Player()
 void Player::move(sf::Vector2f direction)
 {
     sf::Vector2f position = m_shape.getPosition();
-    if (0 < (position.y + direction.y) && (position.y + direction.y) < WINDOW_HEIGH - PADDLE_HEIGHT) { // If there is a problem, change that
+    if (0 < (position.y + direction.y) && (position.y + direction.y) < WINDOW_HEIGH - PADDLE_HEIGHT) {
         m_shape.move(direction);
     }
 
@@ -31,9 +31,7 @@ void Player::draw(sf::RenderWindow *window)
     m_shape.draw(window);
 };
 
-
 MyRect *Player::getShape()
 {
     return &m_shape;
 };
-

@@ -32,13 +32,18 @@ sf::Vector2f MyRect::getPosition()
     return m_position;
 };
 
-void MyRect::setPosition(sf::Vector2f newPosition)
+sf::Vector2f MyRect::getSize()
 {
-    m_position = newPosition;
-    m_rect.setPosition(m_position);
+    return m_size;
 };
 
 sf::RectangleShape MyRect::getShape()
 {
     return m_rect;
+};
+
+void MyRect::setPosition(sf::Vector2f newPosition)
+{
+    m_position = newPosition;
+    m_rect.setPosition(m_position);
 };
