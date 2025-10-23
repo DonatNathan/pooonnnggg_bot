@@ -28,7 +28,7 @@ class MyGame {
         bool m_isDebugMode;
 
     public:
-        MyGame(std::string gamemode);
+        MyGame(std::string gamemode, sf::RenderWindow *window);
         ~MyGame();
 
         void checkEvents();

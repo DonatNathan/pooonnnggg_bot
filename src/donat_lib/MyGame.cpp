@@ -1,6 +1,6 @@
 #include "donat_lib/MyGame.hpp"
 
-MyGame::MyGame(std::string gamemode)
+MyGame::MyGame(std::string gamemode, sf::RenderWindow *window)
     :
     m_topBar(sf::Vector2f({WINDOW_WIDTH, BORDER_VERTICAL_HEIGHT}), sf::Color::White, sf::Vector2f({0, 0})),
     m_bottomBar(sf::Vector2f({WINDOW_WIDTH, BORDER_VERTICAL_HEIGHT}), sf::Color::White, sf::Vector2f({0, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT})),
@@ -8,7 +8,7 @@ MyGame::MyGame(std::string gamemode)
     m_rightBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({WINDOW_WIDTH - BORDER_HORIZONTAL_WIDTH - PADDLE_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2})),
     m_leftPlayer('0', sf::Vector2f({(WINDOW_WIDTH * (float) 0.25 - 32 / 2), 50})),
     m_rightPlayer('0', sf::Vector2f({(WINDOW_WIDTH * (float) 0.75 - 32 / 2), 50})),
-    m_bot(gamemode)
+    m_bot(gamemode, window, &m_isDebugMode)
 {
     m_scoreLeft = 0;
     m_scoreRight = 0;

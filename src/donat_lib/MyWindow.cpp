@@ -2,7 +2,7 @@
 
 MyWindow::MyWindow(std::string name, sf::VideoMode mode, std::string gamemode)
     :
-    m_game(gamemode)
+    m_game(gamemode, &m_window)
 {
     m_name = name;
     m_mode = mode;
@@ -33,6 +33,7 @@ MyWindow::~MyWindow()
 void MyWindow::Init()
 {
     while (m_window.isOpen()) {
+        Clear();
         CheckEvents();
         Update();
         Draw();
@@ -60,9 +61,13 @@ void MyWindow::Update()
     m_game.update();
 };
 
-void MyWindow::Draw()
+void MyWindow::Clear()
 {
     m_window.clear(sf::Color::Black);
+};
+
+void MyWindow::Draw()
+{
     m_game.draw(&m_window);
     m_window.display();
 };

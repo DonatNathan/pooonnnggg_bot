@@ -7,9 +7,12 @@
 class Bot {
     private:
         std::string m_gamemode;
+        sf::RenderWindow *m_window;
+        MyRect m_simulatedBall;
+        bool *m_isDebugMode;
 
     public:
-        Bot(std::string gamemode);
+        Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode);
         ~Bot();
 
         void analyse(Ball ball, Player *himself, Player *opponent, float dt);

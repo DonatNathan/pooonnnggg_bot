@@ -17,6 +17,7 @@ inline float PADDLE_HEIGHT = 56;
 inline float PADDLE_SPEED = 240;
 
 inline float BALL_SIZE = 8;
+inline float DEBUG_BALL_SIZE = 4;
 inline float BALL_SPEED = 200;
 inline float BALL_MAX_SPEED = 600;
 

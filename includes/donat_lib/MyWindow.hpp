@@ -17,6 +17,7 @@ class MyWindow {
         ~MyWindow();
         
         void Init();
+        void Clear();
         void CheckEvents();
         void Draw();
         void Update();

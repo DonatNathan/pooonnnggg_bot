@@ -1,8 +1,12 @@
 #include "Bot.hpp"
 
-Bot::Bot(std::string gamemode)
+Bot::Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode)
+    :
+    m_simulatedBall(sf::Vector2f({DEBUG_BALL_SIZE, DEBUG_BALL_SIZE}), sf::Color::Green, sf::Vector2f({100, 100}))
 {
     m_gamemode = gamemode;
+    m_window = window;
+    m_isDebugMode = isDebugMode;
 };
 
 Bot::~Bot()
@@ -115,9 +119,13 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
 
     sf::FloatRect rectOpponent = opponent->getShape()->getShape().getGlobalBounds();
 
+    std::vector<sf::Vector2f> simulatedPositions;
+
     while ((ballVelocity.x > 0 && ballPosition.x + BALL_SIZE <= opponent->getShape()->getPosition().x) || (ballVelocity.x < 0 && ballPosition.x >= himself->getShape()->getPosition().x + PADDLE_WIDTH)) {
 
         ballPosition += ballVelocity * ball.getSpeed() * dtSimulation;
+
+        simulatedPositions.push_back(ballPosition);
 
         if (ballPosition.y < BORDER_VERTICAL_HEIGHT || ballPosition.y + BALL_SIZE > WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
             ballVelocity.y = -ballVelocity.y;
@@ -131,6 +139,13 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
 
             ballVelocity.x = -ballVelocity.x;
             ballVelocity.y = verticalSpeed / ball.getSpeed();
+        }
+    }
+
+    if (*m_isDebugMode) {
+        for (auto&& point : simulatedPositions) {
+            m_simulatedBall.setPosition({point.x + DEBUG_BALL_SIZE / 2, point.y + DEBUG_BALL_SIZE / 2});
+            m_simulatedBall.draw(m_window);
         }
     }
 
