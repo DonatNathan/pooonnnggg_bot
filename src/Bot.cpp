@@ -31,18 +31,23 @@ void Bot::updateEasyBot(Ball ball, Player *himself, float dt)
     float bHeight = ballShape->getSize().y;
     float hHeight = himselfShape->getSize().y;
 
-    if (bY + bHeight / 2 < hY + hHeight / 2) {
-        sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
-        if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
-    } else if (bY + bHeight / 2 > hY + hHeight / 2) {
-        sf::Vector2f direction = {0, PADDLE_SPEED * dt};
-        if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+    float ballCenter = bY + bHeight / 2;
+    float paddleCenter = hY + hHeight / 2;
+
+    if (std::abs(ballCenter - paddleCenter) > PADDLE_SPEED * dt) {
+        if (ballCenter < paddleCenter) {
+            sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
+            if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
+        } else if (ballCenter > paddleCenter) {
+            sf::Vector2f direction = {0, PADDLE_SPEED * dt};
+            if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+        }
     }
 };
 
@@ -52,21 +57,24 @@ void Bot::updateMediumBot(Ball ball, Player *himself, Player *opponent, float dt
 
     float hY = himselfShape->getPosition().y;
     float hHeight = himselfShape->getSize().y;
+    float paddleCenter = hY + hHeight / 2;
 
     float yTarget = simulateBall(ball, himself, opponent);
 
-    if (yTarget < hY + hHeight / 2) {
-        sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
-        if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
-    } else if (yTarget > hY + hHeight / 2) {
-        sf::Vector2f direction = {0, PADDLE_SPEED * dt};
-        if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+    if (std::abs(yTarget - paddleCenter) > PADDLE_SPEED * dt) {
+        if (yTarget < paddleCenter) {
+            sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
+            if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
+        } else if (yTarget > paddleCenter) {
+            sf::Vector2f direction = {0, PADDLE_SPEED * dt};
+            if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+        }
     }
 };
 
@@ -81,18 +89,20 @@ void Bot::updateHardBot(Ball ball, Player *himself, Player *opponent, float dt)
     float interceptY = simulateBall(ball, himself, opponent);
     float yTarget = computeAttack(ball, himself, opponent, interceptY);
 
-    if (yTarget < paddleCenter) {
-        sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
-        if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
-    } else if (yTarget > paddleCenter) {
-        sf::Vector2f direction = {0, PADDLE_SPEED * dt};
-        if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
-            himselfShape->move(direction);
-        else
-            himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+    if (std::abs(yTarget - paddleCenter) > PADDLE_SPEED * dt) {
+        if (yTarget < paddleCenter) {
+            sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
+            if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
+        } else if (yTarget > paddleCenter) {
+            sf::Vector2f direction = {0, PADDLE_SPEED * dt};
+            if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
+                himselfShape->move(direction);
+            else
+                himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+        }
     }
 };
 
