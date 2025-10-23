@@ -20,6 +20,8 @@ inline float BALL_SIZE = 8;
 inline float BALL_SPEED = 200;
 inline float BALL_MAX_SPEED = 600;
 
+inline float IMPACT_VERTICAL_SPEED = 400;
+
 inline float SCORE_SIZE = 8;
 
 inline float FONT_SIZE = 64;

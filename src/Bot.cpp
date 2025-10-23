@@ -72,7 +72,28 @@ void Bot::updateMediumBot(Ball ball, Player *himself, Player *opponent, float dt
 
 void Bot::updateHardBot(Ball ball, Player *himself, Player *opponent, float dt)
 {
-    std::cout << "Hard analyse..." << std::endl;
+    MyRect *himselfShape = himself->getShape();
+
+    float hY = himselfShape->getPosition().y;
+    float hHeight = himselfShape->getSize().y;
+    float paddleCenter = hY + hHeight / 2;
+
+    float interceptY = simulateBall(ball, himself, opponent);
+    float yTarget = computeAttack(ball, himself, opponent, interceptY);
+
+    if (yTarget < paddleCenter) {
+        sf::Vector2f direction = {0, - PADDLE_SPEED * dt};
+        if (BORDER_VERTICAL_HEIGHT <= (hY + direction.y))
+            himselfShape->move(direction);
+        else
+            himselfShape->move({direction.x, (hY - BORDER_VERTICAL_HEIGHT) * -1});
+    } else if (yTarget > paddleCenter) {
+        sf::Vector2f direction = {0, PADDLE_SPEED * dt};
+        if ((hY + PADDLE_HEIGHT + direction.y) <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
+            himselfShape->move(direction);
+        else
+            himselfShape->move({direction.x, WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT - hY});
+    }
 };
 
 float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
@@ -96,7 +117,7 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
         if (ballRect.findIntersection(rectOpponent) && ballVelocity.x > 0) {
             float paddleCenter = rectOpponent.position.y + PADDLE_HEIGHT / 2;
             float impact = (ballPosition.y + BALL_SIZE / 2 - paddleCenter) / (PADDLE_HEIGHT / 2);
-            float verticalSpeed = impact * 400.f;
+            float verticalSpeed = impact * IMPACT_VERTICAL_SPEED;
 
             ballVelocity.x = -ballVelocity.x;
             ballVelocity.y = verticalSpeed / ball.getSpeed();
@@ -104,4 +125,23 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
     }
 
     return ballPosition.y + BALL_SIZE / 2;
+};
+
+float Bot::computeAttack(Ball ball, Player *himself, Player *opponent, float interceptY)
+{
+    float botX = himself->getShape()->getPosition().x;
+    float oppX = opponent->getShape()->getPosition().x;
+
+    float oppCenter = opponent->getShape()->getPosition().y + PADDLE_HEIGHT / 2;
+    float targetY = (oppCenter < WINDOW_HEIGH / 2.f) ? WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT : BORDER_VERTICAL_HEIGHT;
+
+    float deltaX = std::abs(oppX - botX);
+    float deltaY = targetY - interceptY;
+    float desiredSlope = deltaY / deltaX;
+
+    float vX = std::abs(ball.getSpeed());
+    float vY = desiredSlope * vX;
+    float requiredImpact = std::clamp(vY / IMPACT_VERTICAL_SPEED, -1.f, 1.f);
+
+    return interceptY + (PADDLE_HEIGHT / 2.f) * requiredImpact;
 };

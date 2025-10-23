@@ -1,5 +1,6 @@
 #include "Ball.hpp"
 #include "Player.hpp"
+#include <algorithm>
 
 #pragma once
 
@@ -17,4 +18,5 @@ class Bot {
         void updateHardBot(Ball ball, Player *himself, Player *opponent, float dt);
 
         float simulateBall(Ball ball, Player *himself, Player *opponent);
+        float computeAttack(Ball ball, Player *himself, Player *opponent, float interceptY);
 };
