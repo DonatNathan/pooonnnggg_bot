@@ -1,12 +1,13 @@
 #include "Bot.hpp"
 
-Bot::Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode)
+Bot::Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode, bool *isSimulationDisplayed)
     :
     m_simulatedBall(sf::Vector2f({DEBUG_BALL_SIZE, DEBUG_BALL_SIZE}), sf::Color::Green, sf::Vector2f({100, 100}))
 {
     m_gamemode = gamemode;
     m_window = window;
     m_isDebugMode = isDebugMode;
+    m_isSimulationDisplayed = isSimulationDisplayed;
 };
 
 Bot::~Bot()
@@ -142,9 +143,15 @@ float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
         }
     }
 
-    if (*m_isDebugMode) {
+    if (*m_isSimulationDisplayed) {
+
+        if (*m_isDebugMode)
+            m_simulatedBall.setColor(sf::Color::Green);
+        else
+            m_simulatedBall.setColor(sf::Color::White);
+
         for (auto&& point : simulatedPositions) {
-            m_simulatedBall.setPosition({point.x + DEBUG_BALL_SIZE / 2, point.y + DEBUG_BALL_SIZE / 2});
+            m_simulatedBall.setPosition({point.x + (BALL_SIZE - DEBUG_BALL_SIZE) / 2, point.y + (BALL_SIZE - DEBUG_BALL_SIZE) / 2});
             m_simulatedBall.draw(m_window);
         }
     }

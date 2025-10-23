@@ -51,6 +51,8 @@ void MyWindow::CheckEvents()
         } else if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>()) {
             if (keyReleased->scancode == sf::Keyboard::Scancode::D)
                 m_game.changeDebugMode();
+            else if (keyReleased->scancode == sf::Keyboard::Scancode::F)
+                m_game.changeSimulationDisplay();
         }
     }
     m_game.checkEvents();

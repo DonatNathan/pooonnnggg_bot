@@ -26,6 +26,7 @@ class MyGame {
         std::string m_gamemode;
         Bot m_bot;
         bool m_isDebugMode;
+        bool m_isSimulationDisplayed;
 
     public:
         MyGame(std::string gamemode, sf::RenderWindow *window);
@@ -36,4 +37,5 @@ class MyGame {
         void updateScore();
         void draw(sf::RenderWindow *window);
         void changeDebugMode();
+        void changeSimulationDisplay();
 };

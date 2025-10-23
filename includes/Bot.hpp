@@ -10,9 +10,10 @@ class Bot {
         sf::RenderWindow *m_window;
         MyRect m_simulatedBall;
         bool *m_isDebugMode;
+        bool *m_isSimulationDisplayed;
 
     public:
-        Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode);
+        Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode, bool *isSimulationDisplayed);
         ~Bot();
 
         void analyse(Ball ball, Player *himself, Player *opponent, float dt);

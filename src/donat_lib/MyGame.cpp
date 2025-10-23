@@ -8,13 +8,14 @@ MyGame::MyGame(std::string gamemode, sf::RenderWindow *window)
     m_rightBoard(sf::Vector2f({PADDLE_WIDTH, PADDLE_HEIGHT}), sf::Color::White, sf::Vector2f({WINDOW_WIDTH - BORDER_HORIZONTAL_WIDTH - PADDLE_WIDTH, (WINDOW_HEIGH - PADDLE_HEIGHT) / 2})),
     m_leftPlayer('0', sf::Vector2f({(WINDOW_WIDTH * (float) 0.25 - 32 / 2), 50})),
     m_rightPlayer('0', sf::Vector2f({(WINDOW_WIDTH * (float) 0.75 - 32 / 2), 50})),
-    m_bot(gamemode, window, &m_isDebugMode)
+    m_bot(gamemode, window, &m_isDebugMode, &m_isSimulationDisplayed)
 {
     m_scoreLeft = 0;
     m_scoreRight = 0;
     m_gamemode = gamemode;
     float y = BORDER_VERTICAL_HEIGHT;
     m_isDebugMode = false;
+    m_isSimulationDisplayed = false;
     while (y < WINDOW_HEIGH) {
         m_line.push_back(MyRect(sf::Vector2f({MIDDLE_LINE_POINT_SIZE, MIDDLE_LINE_POINT_SIZE}), sf::Color::White, sf::Vector2f({(WINDOW_WIDTH - MIDDLE_LINE_POINT_SIZE) / 2, y})));
         y += MIDDLE_LINE_POINT_SIZE + MIDDLE_LINE_POINT_GAB;
@@ -94,4 +95,9 @@ void MyGame::changeDebugMode()
         m_rightBoard.getShape()->setColor(sf::Color::White);
         m_ball.getShape()->setColor(sf::Color::White);
     }
+};
+
+void MyGame::changeSimulationDisplay()
+{
+    m_isSimulationDisplayed = !m_isSimulationDisplayed;
 };
