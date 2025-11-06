@@ -31,7 +31,7 @@ State PongEnv::reset()
     return getState();
 };
 
-StepResult PongEnv::step(int action, float frame_dt = PHYS_DT)
+StepResult PongEnv::step(int action, float frame_dt)
 {
     // Apply action to right paddle
     float move = 0.f;

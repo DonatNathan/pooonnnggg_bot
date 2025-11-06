@@ -12,3 +12,4 @@
 #include "constants.hpp"
 #include "dqn_implementation.hpp"
 #include "pong_env.hpp"
+#include "memory.hpp"

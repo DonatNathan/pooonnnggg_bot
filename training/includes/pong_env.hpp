@@ -27,7 +27,7 @@ class PongEnv {
         PongEnv();
 
         State reset();
-        StepResult step(int action, float frame_dt);
+        StepResult step(int action, float frame_dt=PHYS_DT);
         State getState();
 
     private:
