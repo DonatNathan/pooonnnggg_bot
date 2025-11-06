@@ -5,7 +5,10 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/includes",
-                "${workspaceFolder}/build/_deps/sfml-src/include"
+                "${workspaceFolder}/training/includes",
+                "${workspaceFolder}/build/_deps/sfml-src/include",
+                "/home/donat/libtorch/include",
+                "/home/donat/libtorch/include/torch/csrc/api/include"
             ],
             "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "intelliSenseMode": "linux-gcc-x64",
