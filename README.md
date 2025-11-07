@@ -31,12 +31,26 @@ cd pooonnnggg_bot
 ## How to compile
 
 ```
-cmake -B build
-cmake --build build
+mkdir build
+cd build
+cmake -DCMAKE_PREFIX_PATH=~/libtorch ..
+make -j
+./bin/PongBot
 ```
 
 ## How to run
 
 ```
 ./build/bin/PongBot
+```
+
+## How to compile training
+
+```
+cd training
+mkdir build
+cd build
+cmake ..
+make -j
+./pong_train
 ```

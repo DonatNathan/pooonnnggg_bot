@@ -2,6 +2,8 @@
 #include "Player.hpp"
 #include <algorithm>
 
+#include <torch/torch.h>
+
 #pragma once
 
 class Bot {
