@@ -6,7 +6,7 @@ void displayHelp()
     std::cout << "Executable:" << std::endl;
     std::cout << "  ./PongBot -m [mode]" << std::endl;
     std::cout << "Flags:" << std::endl;
-    std::cout << "  -m, --mode: Choose the mode of the game between 'multiplayer', 'easy', 'medium' and 'hard'" << std::endl;
+    std::cout << "  -m, --mode: Choose the mode of the game between 'multiplayer', 'easy', 'medium', 'hard' and 'ai'" << std::endl;
     std::cout << "\n===== END HELP =====" << std::endl;
 }
 
@@ -17,7 +17,7 @@ int argumentsErrorHandling(int argc, char **argv)
         return 1;
     }
 
-    std::array<std::string, 4> modeList = {"multiplayer", "easy", "medium", "hard"};
+    std::array<std::string, 5> modeList = {"multiplayer", "easy", "medium", "hard", "ai"};
     std::string flag = argv[1];
     std::string mode = argv[2];
     bool modeFound = false;
@@ -55,5 +55,3 @@ int main(int argc, char **argv)
 }
 
 // TODO: Fix ball colliders
-// TODO: Display ball simulations
-// TODO: Find a breach in the opponent

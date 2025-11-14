@@ -8,6 +8,20 @@ Bot::Bot(std::string gamemode, sf::RenderWindow *window, bool *isDebugMode, bool
     m_window = window;
     m_isDebugMode = isDebugMode;
     m_isSimulationDisplayed = isSimulationDisplayed;
+
+    if (m_gamemode == "ai") {
+
+        m_dqn = DQN();
+
+        try {
+            torch::load(m_dqn, "../training/build/models/pong_dqn_best.pt");
+            m_dqn->eval();
+            std::cout << "Loaded DQN model.\n";
+        }
+        catch (...) {
+            std::cerr << "Model load failed.\n";
+        }
+    }
 };
 
 Bot::~Bot()
@@ -21,8 +35,10 @@ void Bot::analyse(Ball ball, Player *himself, Player *opponent, float dt)
         updateEasyBot(ball, himself, dt);
     else if (m_gamemode == "medium")
         updateMediumBot(ball, himself, opponent, dt);
-    else
+    else if (m_gamemode == "hard")
         updateHardBot(ball, himself, opponent, dt);
+    else
+        updateAIBot(ball, himself, opponent, dt);
 };
 
 void Bot::updateEasyBot(Ball ball, Player *himself, float dt)
@@ -110,6 +126,61 @@ void Bot::updateHardBot(Ball ball, Player *himself, Player *opponent, float dt)
         }
     }
 };
+
+std::array<float, 6> Bot::getState(Ball ball, Player* bot, Player* opponent)
+{
+    auto bPos = ball.getShape()->getPosition();
+    auto bVel = ball.getVelocity();
+    auto pPos = bot->getShape()->getPosition();
+    auto oPos = opponent->getShape()->getPosition();
+
+    return {
+        bPos.x / WINDOW_WIDTH,
+        bPos.y / WINDOW_HEIGH,
+        bVel.x / BALL_MAX_SPEED,
+        bVel.y / BALL_MAX_SPEED,
+        pPos.y / WINDOW_HEIGH,
+        oPos.y / WINDOW_HEIGH
+    };
+}
+
+void Bot::updateAIBot(Ball ball, Player* himself, Player* opponent, float dt)
+{
+    // --- 1. Build the state vector ---
+    auto state = getState(ball, himself, opponent);
+
+    // --- 2. Run the model ---
+
+    torch::Tensor input = torch::from_blob((float*)state.data(), {1, 6}).clone();
+
+    torch::Tensor qvalues = m_dqn->forward(input);
+    int action = qvalues.argmax(1).item<int>();
+
+    // --- 3. Move the paddle according to the chosen action ---
+    MyRect* paddle = himself->getShape();
+    float y = paddle->getPosition().y;
+
+    if (action == 0) {
+        // STAY STILL
+        return;
+    }
+    else if (action == 1) {
+        // MOVE UP
+        sf::Vector2f dir(0, -PADDLE_SPEED * dt);
+        if (y + dir.y >= BORDER_VERTICAL_HEIGHT)
+            paddle->move(dir);
+        else
+            paddle->move({0, BORDER_VERTICAL_HEIGHT - y});
+    }
+    else if (action == 2) {
+        // MOVE DOWN
+        sf::Vector2f dir(0, PADDLE_SPEED * dt);
+        if (y + PADDLE_HEIGHT + dir.y <= WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT)
+            paddle->move(dir);
+        else
+            paddle->move({0, (WINDOW_HEIGH - BORDER_VERTICAL_HEIGHT - PADDLE_HEIGHT) - y});
+    }
+}
 
 float Bot::simulateBall(Ball ball, Player *himself, Player *opponent)
 {
