@@ -1,5 +1,4 @@
 #include "donat_lib/MyRect.hpp"
-#include "donat_lib/MyText.hpp"
 #include "donat_lib/Globals.hpp"
 #include "Number.hpp"
 #include "Ball.hpp"
